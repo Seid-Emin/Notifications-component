@@ -80,23 +80,6 @@ class Notifications extends Component {
             .catch(error => { console.log('something went wrong on get') });
     }
 
-    componentDidUpdate() {
-        console.log('didUpdate Notifications');
-    }
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.state.isNewNotif === nextState.isNewNotif) {
-    //         console.log(this.state.isNewNotif + 'and' + nextState.isNewNotif);
-
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
-    // componentDidUpdate() {
-    //     console.log('i did update');
-
-    // }
     // open/hide notifications window
     showNotificationsHandler = () => {
         let localStorageNotifications = JSON.parse(localStorage.getItem('notifications'));

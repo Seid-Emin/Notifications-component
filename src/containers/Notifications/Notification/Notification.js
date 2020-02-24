@@ -5,11 +5,6 @@ import './Notification.css';
 class Notification extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     deleted: false, //for animation purposes only        / exiting animation control
-        //     expired: false, //maintainign the removing on expire / exiting animation control
-        //     // unmount: false, //maintainign the removing on expire / exiting animation control
-        // }
         this.deleteNotificationHandler = this.deleteNotificationHandler.bind(this);
     }
 
@@ -19,43 +14,13 @@ class Notification extends Component {
     //If you delete these line will still work as intended expet the exiting animations will be missing
     //also if you want to try it delete in the switch case the second addedclass, again using for exiting animation
     //will update when a proper solution is found
+    //cleaned a bit more, but looks like it renders the existing notification every time the loadData is called
     componentDidMount() {
         if (this.props.notification.expires) {
             setTimeout(() => {
-                let updatedNotification = { ...this.props.notification };
-                updatedNotification.deleted = true;
-                // this.setState({ expired: true, deleted: true, notification: updatedNotification });
                 this.props.delete(this.props.notification.id);
-            },
-                this.props.notification.expires ? this.props.notification.expires : null);
+            }, this.props.notification.expires);
         }
-    }
-
-    componentDidUpdate() {
-        console.log('i update from notification didupdate');
-
-        //     let getNotifications = JSON.parse(localStorage.getItem('notifications'));
-        //     let updateNotification = [...getNotifications];
-        //     let currentNotif = updateNotification.findIndex(notif => notif.id === this.props.notification.id);
-        //     if (this.state.expired || this.state.unmount) {
-        //         updateNotification[currentNotif].deleted = true;
-        //         updateNotification[currentNotif].new = false;
-        //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
-        //         return updateNotification[currentNotif];
-        //     }
-        //     if (this.props.visited) {
-        //         setTimeout(() => {
-        //             updateNotification[currentNotif].new = false;
-        //             localStorage.setItem('notifications', JSON.stringify(updateNotification));
-        //             return updateNotification[currentNotif];
-        //         }, 2500)
-
-        //     }
-        //     if (this.props.notification.new && !this.props.visited) {
-        //         updateNotification[currentNotif].new = true;
-        //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
-        //         return updateNotification[currentNotif];
-        //     }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -85,9 +50,6 @@ class Notification extends Component {
         if (!propsNotification.new) {
             isNew.push('Hide');
         }
-
-        //controls the FadeOut process of the notification acording the conditions
-        // let expireFadeOut = this.state.expired && this.state.notification.expires ? ' FadeOut' : '';
 
         let notification = null; //initial set of variable for controled render acording passed props
         if (!propsNotification.deleted) {
