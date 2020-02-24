@@ -1,6 +1,6 @@
 Simple Notification Component.
 
-Conneted to firebase server ( can be changed in ../src/containers/Notifications/Notification.js ). Initial polling time is set to 20s.
+Conneted to firebase server ( can be changed in ../src/containers/Notifications/Notification.js ). Initial polling time is set to 20s. Uses localStora to store the notifications data ( as which one are recieved, seen and deleted ).
 
 Supports 3 main types :  text, bonus, promotion.
 
