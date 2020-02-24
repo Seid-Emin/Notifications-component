@@ -122,48 +122,6 @@
     opacity: 0;
 }
 
-
-/* Popup Notifications */
-.Nofity-popUp {
-    position: absolute;
-    right: 0;
-    background-color: inherit;
-    border: none;
-    margin: 0 5px 10px 5px;
-    padding: 5px 0 5px 0;
-    line-height: 2;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: flex-start;
-    align-content: flex-start;
-    flex-direction: column;
-    width: 350px;
-    height: 200px;
-    color: #949494;
-    border-radius: 5px;
-    height: min-content;
-    max-height: 300px;
-    min-height: 80px;
-    cursor: pointer;
-}
-
-.Popup-text {
-    background-color: #f5f5e0;
-}
-
-.Popup-bonus {
-    background-color: #a3e2a7
-}
-
-.Popup-Promotion {
-    background-color: #f8392b;
-    flex-direction: row;
-    padding-left: 10px;
-    justify-content: flex-start;
-    align-items: center;
-}
-
 .Nofity-delete {
     position: absolute;
     right: 15px;

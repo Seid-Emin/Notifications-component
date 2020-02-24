@@ -17,11 +17,13 @@ class Notifications extends Component {
     }
 
     componentDidMount() {
+        console.log('didMount Notifications');
+
         //load data on initial start only
         this.loadData();
 
         //Simulate a polling, repeated reguest to server to check for new or updated/deleted notifications
-        this.intervalId = setInterval(() => this.loadData(), 20000);
+        this.intervalId = setInterval(() => this.loadData(), 10000);
     }
 
     componentWillUnmount() {
@@ -45,7 +47,7 @@ class Notifications extends Component {
                             ...res.data[key],
                             new: true,
                             deleted: false,
-                            hasChanged: false
+                            hasChanged: true
                         });
                     }
                 }
@@ -78,9 +80,13 @@ class Notifications extends Component {
             .catch(error => { console.log('something went wrong on get') });
     }
 
+    componentDidUpdate() {
+        console.log('didUpdate Notifications');
+    }
+
     // shouldComponentUpdate(nextProps, nextState) {
-    //     if (this.state.polling !== nextState.polling) {
-    //         console.log(this.state.polling + 'and' + nextState.polling);
+    //     if (this.state.isNewNotif === nextState.isNewNotif) {
+    //         console.log(this.state.isNewNotif + 'and' + nextState.isNewNotif);
 
     //         return true;
     //     }

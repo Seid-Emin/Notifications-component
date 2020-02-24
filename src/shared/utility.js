@@ -35,7 +35,6 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         }
                         checkedNotifArr.push(existingNotification);
                     } else {
-                        existingNotification.hasChanged = true;
                         hasChangedGlobal = true;
                         checkedNotifArr.unshift(fetchedNotif);
                         isNewNotification = true;
@@ -50,7 +49,6 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         }
                         checkedNotifArr.push(existingNotification);
                     } else {
-                        existingNotification.hasChanged = true;
                         hasChangedGlobal = true;
                         checkedNotifArr.unshift(fetchedNotif);
                         isNewNotification = true;
@@ -66,7 +64,7 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         }
                         checkedNotifArr.push(existingNotification);
                     } else {
-                        existingNotification.hasChanged = true;
+
                         hasChangedGlobal = true;
                         checkedNotifArr.unshift(fetchedNotif);
                         isNewNotification = true;

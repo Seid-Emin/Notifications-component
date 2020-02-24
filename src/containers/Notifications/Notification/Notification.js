@@ -5,11 +5,11 @@ import './Notification.css';
 class Notification extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            deleted: false, //for animation purposes only        / exiting animation control
-            expired: false, //maintainign the removing on expire / exiting animation control
-            // unmount: false, //maintainign the removing on expire / exiting animation control
-        }
+        // this.state = {
+        //     deleted: false, //for animation purposes only        / exiting animation control
+        //     expired: false, //maintainign the removing on expire / exiting animation control
+        //     // unmount: false, //maintainign the removing on expire / exiting animation control
+        // }
         this.deleteNotificationHandler = this.deleteNotificationHandler.bind(this);
     }
 
@@ -24,37 +24,50 @@ class Notification extends Component {
             setTimeout(() => {
                 let updatedNotification = { ...this.props.notification };
                 updatedNotification.deleted = true;
-                this.setState({ expired: true, deleted: true, notification: updatedNotification });
+                // this.setState({ expired: true, deleted: true, notification: updatedNotification });
                 this.props.delete(this.props.notification.id);
             },
                 this.props.notification.expires ? this.props.notification.expires : null);
         }
     }
 
-    // componentDidUpdate() {
-    //     let getNotifications = JSON.parse(localStorage.getItem('notifications'));
-    //     let updateNotification = [...getNotifications];
-    //     let currentNotif = updateNotification.findIndex(notif => notif.id === this.props.notification.id);
-    //     if (this.state.expired || this.state.unmount) {
-    //         updateNotification[currentNotif].deleted = true;
-    //         updateNotification[currentNotif].new = false;
-    //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
-    //         return updateNotification[currentNotif];
-    //     }
-    //     if (this.props.visited) {
-    //         setTimeout(() => {
-    //             updateNotification[currentNotif].new = false;
-    //             localStorage.setItem('notifications', JSON.stringify(updateNotification));
-    //             return updateNotification[currentNotif];
-    //         }, 2500)
+    componentDidUpdate() {
+        console.log('i update from notification didupdate');
 
-    //     }
-    //     if (this.props.notification.new && !this.props.visited) {
-    //         updateNotification[currentNotif].new = true;
-    //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
-    //         return updateNotification[currentNotif];
-    //     }
-    // }
+        //     let getNotifications = JSON.parse(localStorage.getItem('notifications'));
+        //     let updateNotification = [...getNotifications];
+        //     let currentNotif = updateNotification.findIndex(notif => notif.id === this.props.notification.id);
+        //     if (this.state.expired || this.state.unmount) {
+        //         updateNotification[currentNotif].deleted = true;
+        //         updateNotification[currentNotif].new = false;
+        //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
+        //         return updateNotification[currentNotif];
+        //     }
+        //     if (this.props.visited) {
+        //         setTimeout(() => {
+        //             updateNotification[currentNotif].new = false;
+        //             localStorage.setItem('notifications', JSON.stringify(updateNotification));
+        //             return updateNotification[currentNotif];
+        //         }, 2500)
+
+        //     }
+        //     if (this.props.notification.new && !this.props.visited) {
+        //         updateNotification[currentNotif].new = true;
+        //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
+        //         return updateNotification[currentNotif];
+        //     }
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (this.props.notification.hasChanged) {
+            return true;
+        }
+
+        if (this.props.notification.deleted) {
+            return true;
+        }
+        return false;
+    }
 
     //End
 
