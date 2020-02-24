@@ -14,7 +14,9 @@ Supports 3 main types :  text, bonus, promotion.
 
 - When the API returns new data for a specific notification it will be updated in the list and marked as 'new'.
 
-- Opening and closing the notification menu are animated, as well as adding and removing items in the notification list
+- Opening and closing the notification menu are animated, as well as adding and removing items in the notification list.
+
+Example data format can be found in "notifications.json".
 
 
 
