@@ -7,7 +7,7 @@ class Notification extends Component {
         super(props);
         this.state = {
             deleted: false, //for animation purposes only        / exiting animation control
-            // expired: false, //maintainign the removing on expire / exiting animation control
+            expired: false, //maintainign the removing on expire / exiting animation control
             // unmount: false, //maintainign the removing on expire / exiting animation control
         }
         this.deleteNotificationHandler = this.deleteNotificationHandler.bind(this);

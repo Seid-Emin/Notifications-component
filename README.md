@@ -1,6 +1,6 @@
 Simple Notification Component.
 
-Conneted to firebase server ( can be changed in ../src/containers/Notifications/Notification.js )
+Conneted to firebase server ( can be changed in ../src/containers/Notifications/Notification.js ). Initial polling time is set to 20s.
 
 Supports 3 main types :  text, bonus, promotion.
 
