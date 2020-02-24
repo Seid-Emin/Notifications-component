@@ -1,3 +1,23 @@
+Simple Notification Component.
+
+Conneted to firebase server ( can be changed in ../src/containers/Notifications/Notification.js )
+
+Supports 3 main types :  text, bonus, promotion.
+
+- When a notification expires will be removed from the notifications list. If they dont have an expiration time, could be removed manualy.
+
+- The menu is opened/closed by a "Notifications (0) 'Bell' " button which shows the number of active notifications. Notifications of type bonus will not be counted in the notification count badge.
+
+- When the API returns new notifications it will be added to the notifications list ( and also marked as 'new').
+
+- When the API returns a response where some notifications are missing will be removed from the list.
+
+- When the API returns new data for a specific notification it will be updated in the list and marked as 'new'.
+
+- Opening and closing the notification menu are animated, as well as adding and removing items in the notification list
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
