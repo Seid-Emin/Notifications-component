@@ -7,8 +7,8 @@ class Notification extends Component {
         super(props);
         this.state = {
             deleted: false, //for animation purposes only        / exiting animation control
-            expired: false, //maintainign the removing on expire / exiting animation control
-            unmount: false, //maintainign the removing on expire / exiting animation control
+            // expired: false, //maintainign the removing on expire / exiting animation control
+            // unmount: false, //maintainign the removing on expire / exiting animation control
         }
         this.deleteNotificationHandler = this.deleteNotificationHandler.bind(this);
     }
@@ -31,30 +31,30 @@ class Notification extends Component {
         }
     }
 
-    componentDidUpdate() {
-        let getNotifications = JSON.parse(localStorage.getItem('notifications'));
-        let updateNotification = [...getNotifications];
-        let currentNotif = updateNotification.findIndex(notif => notif.id === this.props.notification.id);
-        if (this.state.expired || this.state.unmount) {
-            updateNotification[currentNotif].deleted = true;
-            updateNotification[currentNotif].new = false;
-            localStorage.setItem('notifications', JSON.stringify(updateNotification));
-            return updateNotification[currentNotif];
-        }
-        if (this.props.visited) {
-            setTimeout(() => {
-                updateNotification[currentNotif].new = false;
-                localStorage.setItem('notifications', JSON.stringify(updateNotification));
-                return updateNotification[currentNotif];
-            }, 2500)
+    // componentDidUpdate() {
+    //     let getNotifications = JSON.parse(localStorage.getItem('notifications'));
+    //     let updateNotification = [...getNotifications];
+    //     let currentNotif = updateNotification.findIndex(notif => notif.id === this.props.notification.id);
+    //     if (this.state.expired || this.state.unmount) {
+    //         updateNotification[currentNotif].deleted = true;
+    //         updateNotification[currentNotif].new = false;
+    //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
+    //         return updateNotification[currentNotif];
+    //     }
+    //     if (this.props.visited) {
+    //         setTimeout(() => {
+    //             updateNotification[currentNotif].new = false;
+    //             localStorage.setItem('notifications', JSON.stringify(updateNotification));
+    //             return updateNotification[currentNotif];
+    //         }, 2500)
 
-        }
-        if (this.props.notification.new && !this.props.visited) {
-            updateNotification[currentNotif].new = true;
-            localStorage.setItem('notifications', JSON.stringify(updateNotification));
-            return updateNotification[currentNotif];
-        }
-    }
+    //     }
+    //     if (this.props.notification.new && !this.props.visited) {
+    //         updateNotification[currentNotif].new = true;
+    //         localStorage.setItem('notifications', JSON.stringify(updateNotification));
+    //         return updateNotification[currentNotif];
+    //     }
+    // }
 
     //End
 
@@ -74,14 +74,14 @@ class Notification extends Component {
         }
 
         //controls the FadeOut process of the notification acording the conditions
-        let expireFadeOut = this.state.expired && this.state.notification.expires ? ' FadeOut' : '';
+        // let expireFadeOut = this.state.expired && this.state.notification.expires ? ' FadeOut' : '';
 
         let notification = null; //initial set of variable for controled render acording passed props
         if (!propsNotification.deleted) {
             switch (propsNotification.type) {
                 case 'text':
                     notification = (
-                        <div className={this.props.class + expireFadeOut} >
+                        <div className={this.props.class} >
                             <p className={isNew.join(' ')}>new</p>
                             <div className='Notify-title'>{propsNotification.title}</div>
                             <div className='Notify-text'>{propsNotification.text}</div>
@@ -92,7 +92,7 @@ class Notification extends Component {
 
                 case 'bonus':
                     notification = (
-                        <div className={this.props.class + expireFadeOut} >
+                        <div className={this.props.class} >
                             <p className={isNew.join(' ')}>new</p>
                             <div className='Notify-title Bonus-title'>{propsNotification.title}</div>
                             <div className='Notify-text Bonus-text'>{propsNotification.requirement}</div>
@@ -103,7 +103,7 @@ class Notification extends Component {
                     break;
                 case 'Promotion':
                     notification = (
-                        <div className={this.props.class + expireFadeOut} >
+                        <div className={this.props.class} >
                             <p className={isNew.join(' ')}>new</p>
                             <img className='Notification-img Promotion-img' src={propsNotification.image} alt={propsNotification.image} />
                             <a href={propsNotification.link} className='Notify-text Promotion-text' >
