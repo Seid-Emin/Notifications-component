@@ -138,20 +138,18 @@ class Notifications extends Component {
                 return ''
             }
             return <CSSTransition
-                in={true}
+                in={!notification.deleted}
                 appear={false}
                 key={notification.id + count + 1}
-                timeout={notification.expires ? notification.expires : Infinity}
+                timeout={notification.expires ? notification.expires : 1000}
                 classNames="NotificationAnimate"
                 mountOnEnter
-                unmountOnExit ><Notification
+                unmountOnExit >
+                <Notification
                     key={notification.id}
                     notification={notification}
                     delete={this.deleteNotificationHandler}
-                    class={'Notify-item ' + notification.type}
-                    isNewNotif={this.state.isNewNotif}
-                    visited={this.state.visited}
-                    deletedNotif={notification.deleted} />
+                    class={'Notify-item ' + notification.type} />
             </CSSTransition>
         });
 
@@ -159,10 +157,10 @@ class Notifications extends Component {
         let bonusNotifications = this.state.notifications.map(notification => {
             if (notification.type === 'bonus' && !notification.deleted) {
                 return <CSSTransition
-                    in={true}
+                    in={!notification.deleted}
                     appear={false}
                     key={notification.id}
-                    timeout={notification.expires ? notification.expires : Infinity}
+                    timeout={notification.expires ? notification.expires : 1000}
                     classNames="NotificationAnimate"
                     mountOnEnter
                     unmountOnExit >
@@ -170,10 +168,7 @@ class Notifications extends Component {
                         key={notification.id}
                         notification={notification}
                         delete={this.deleteNotificationHandler}
-                        class={'Notify-item ' + notification.type}
-                        isNewNotif={this.state.isNewNotif}
-                        visited={this.state.visited}
-                        deletedNotif={notification.deleted} />
+                        class={'Notify-item ' + notification.type} />
                 </CSSTransition>
             }
             return '';
