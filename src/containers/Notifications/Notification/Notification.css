@@ -153,6 +153,8 @@
     transition: all 500ms ease-in;
 }
 
-.newTransition {
-    color: blue
+.SlideRight {
+    opacity: 0.01;
+    transform: translateX(120%);
+    transition: all 200ms ease-in;
 }

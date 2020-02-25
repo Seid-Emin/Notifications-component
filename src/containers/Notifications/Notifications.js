@@ -17,13 +17,11 @@ class Notifications extends Component {
     }
 
     componentDidMount() {
-        console.log('didMount Notifications');
-
         //load data on initial start only
         this.loadData();
 
         //Simulate a polling, repeated reguest to server to check for new or updated/deleted notifications
-        this.intervalId = setInterval(() => this.loadData(), 10000);
+        this.intervalId = setInterval(() => this.loadData(), 1000000);
     }
 
     componentWillUnmount() {
@@ -141,7 +139,7 @@ class Notifications extends Component {
                 in={!notification.deleted}
                 appear={false}
                 key={notification.id + count + 1}
-                timeout={notification.expires ? notification.expires : 1000}
+                timeout={notification.expires ? notification.expires : 0}
                 classNames="NotificationAnimate"
                 mountOnEnter
                 unmountOnExit >
@@ -160,7 +158,7 @@ class Notifications extends Component {
                     in={!notification.deleted}
                     appear={false}
                     key={notification.id}
-                    timeout={notification.expires ? notification.expires : 1000}
+                    timeout={notification.expires ? notification.expires : 0}
                     classNames="NotificationAnimate"
                     mountOnEnter
                     unmountOnExit >
