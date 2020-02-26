@@ -8,13 +8,7 @@ class Notification extends Component {
         this.deleteNotificationHandler = this.deleteNotificationHandler.bind(this);
     }
 
-    //Start of extra code
-
-    //From here till deleteNotificationHandler are writen only cuz a bug in CSSTransition group
-    //If you delete these line will still work as intended expet the exiting animations will be missing
-    //also if you want to try it delete in the switch case the second addedclass, again using for exiting animation
-    //will update when a proper solution is found
-    //cleaned a bit more, but looks like it renders the existing notification every time the loadData is called
+    //setTimeout for removing notifications if has an expirration time 
     componentDidMount() {
         if (this.props.notification.expires) {
             setTimeout(() => {
@@ -23,6 +17,7 @@ class Notification extends Component {
         }
     }
 
+    //update the componend if these conditions are met
     shouldComponentUpdate(nextProps, nextState) {
         if (this.props.notification.hasChanged) {
             return true;

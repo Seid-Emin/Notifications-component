@@ -138,8 +138,8 @@ class Notifications extends Component {
             return <CSSTransition
                 in={!notification.deleted}
                 appear={false}
-                key={notification.id + count + 1}
-                timeout={500}
+                key={notification.id}
+                timeout={notification.expires ? notification.expires : Infinity}
                 classNames="NotificationAnimate"
                 mountOnEnter
                 unmountOnExit >
@@ -158,7 +158,7 @@ class Notifications extends Component {
                     in={!notification.deleted}
                     appear={false}
                     key={notification.id}
-                    timeout={500}
+                    timeout={notification.expires ? notification.expires : Infinity}
                     classNames="NotificationAnimate"
                     mountOnEnter
                     unmountOnExit >
