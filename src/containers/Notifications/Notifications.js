@@ -21,7 +21,7 @@ class Notifications extends Component {
         this.loadData();
 
         //Simulate a polling, repeated reguest to server to check for new or updated/deleted notifications
-        this.intervalId = setInterval(() => this.loadData(), 1000000);
+        this.intervalId = setInterval(() => this.loadData(), 100000);
     }
 
     componentWillUnmount() {
@@ -139,7 +139,7 @@ class Notifications extends Component {
                 in={!notification.deleted}
                 appear={false}
                 key={notification.id + count + 1}
-                timeout={notification.expires ? notification.expires : 0}
+                timeout={500}
                 classNames="NotificationAnimate"
                 mountOnEnter
                 unmountOnExit >
@@ -158,7 +158,7 @@ class Notifications extends Component {
                     in={!notification.deleted}
                     appear={false}
                     key={notification.id}
-                    timeout={notification.expires ? notification.expires : 0}
+                    timeout={500}
                     classNames="NotificationAnimate"
                     mountOnEnter
                     unmountOnExit >
