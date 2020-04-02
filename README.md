@@ -2,7 +2,7 @@ Simple Notification Component.
 
 Demo - https://notifications-7fe85.web.app/
 
-Conneted to Firebase - Realtime Database ( can be changed in ../src/containers/Notifications/Notification.js ). Initial polling time is set to 20s. Uses LocalStorage to store the notifications data ( as which one are recieved, seen and deleted ).
+Conneted to Firebase - Realtime Database ( can be changed in ../src/containers/Notifications/Notification.js ). Initial polling time is set to 10 000s. Uses LocalStorage to store the notifications data ( as which one are recieved, seen and deleted ).
 
 Supports 3 main types :  text, bonus, promotion.
 

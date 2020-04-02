@@ -21,7 +21,7 @@ class Notifications extends Component {
         this.loadData();
 
         //Simulate a polling, repeated reguest to server to check for new or updated/deleted notifications
-        this.intervalId = setInterval(() => this.loadData(), 100000);
+        this.intervalId = setInterval(() => this.loadData(), 10000);
     }
 
     componentWillUnmount() {
