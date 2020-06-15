@@ -127,13 +127,12 @@ class Notifications extends Component {
         }
 
         //Loop through all notification from store and display them
-
         //Ckech if it is a 'bonus' and is not deleted and/or updated
         let notifications = this.state.notifications.map(notification => {
-            if (notification.type !== 'bonus' && !notification.deleted) {
-                count++;
-            } else {
-                return ''
+            if (!notification.deleted) {
+                if (notification.type !== 'bonus') {
+                    count++;
+                }
             }
             return <CSSTransition
                 in={!notification.deleted}
@@ -151,27 +150,6 @@ class Notifications extends Component {
             </CSSTransition>
         });
 
-        //Display any bonus notification which is not deleted and/or updated
-        let bonusNotifications = this.state.notifications.map(notification => {
-            if (notification.type === 'bonus' && !notification.deleted) {
-                return <CSSTransition
-                    in={!notification.deleted}
-                    appear={false}
-                    key={notification.id}
-                    timeout={notification.expires ? notification.expires : Infinity}
-                    classNames="NotificationAnimate"
-                    mountOnEnter
-                    unmountOnExit >
-                    <Notification
-                        key={notification.id}
-                        notification={notification}
-                        delete={this.deleteNotificationHandler}
-                        class={'Notify-item ' + notification.type} />
-                </CSSTransition>
-            }
-            return '';
-        });
-
         return (
             <React.Fragment>
                 < div className="right Navigation-right" >
@@ -184,7 +162,6 @@ class Notifications extends Component {
                             </div>
                             <TransitionGroup className='Inner-Notification-wrapper'>
                                 {notifications}
-                                {bonusNotifications}
                             </TransitionGroup>
                         </div>
                     </div>
@@ -192,7 +169,6 @@ class Notifications extends Component {
                 <div className='NotificationsOverlay-wrapper'>
                     <TransitionGroup className='Inner-Notification-wrapper NotificationsOverlay-group'>
                         {notifications}
-                        {bonusNotifications}
                     </TransitionGroup>
                 </div>
             </React.Fragment>
