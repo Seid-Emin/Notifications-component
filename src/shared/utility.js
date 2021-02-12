@@ -86,5 +86,5 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
         }
         return checkedNotifArr;
     });
-    return { checkedNotifArr: checkedNotifArr, isNewNotification: isNewNotification, hasChangedGlobal: hasChangedGlobal }
+    return { checkedNotifArr, isNewNotification, hasChangedGlobal }
 };
