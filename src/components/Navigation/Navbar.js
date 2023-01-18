@@ -1,15 +1,15 @@
 import React from 'react';
-
-import Notifications from '../../containers/Notifications/Notifications';
-
 import './Navbar.css';
+
+import { NotificationsComponent } from '../Notifications/Notifications';
+
 
 const navbar = () => {
     return (
         <nav>
-            <div className="nav-wrapper LightBlue">
-                <div className="brand-logo center Position">Logo</div>
-                <Notifications />
+            <div className={'nav-wrapper LightBlue'}>
+                <div className={'brand-logo center Position'}>Logo</div>
+                <NotificationsComponent />
             </div>
         </nav>
     );

@@ -1,17 +1,20 @@
+import { STORAGE_KEYS } from '../core/constants/KEYS';
+
 // used in Notifications.js
 // Accepts
-export const checkForNotificationsDeleted = (apiResponce) => {
-    let localStorageNotifications = JSON.parse(localStorage.getItem('notifications'));
-    let checkForDeletedNotifications = localStorageNotifications;
-    let newArrForNotifications = [];
+export const checkForNotificationsDeleted = (response) => {
+    const checkForDeletedNotifications = JSON.parse(localStorage.getItem(STORAGE_KEYS.localstorage.notifications));
+    const newNotificationsArr = [];
     for (let i in checkForDeletedNotifications) {
-        let isDeleted = apiResponce.findIndex(fetched => fetched.id === checkForDeletedNotifications[i].id);
+        let isDeleted = response.findIndex(fetched => fetched.id === checkForDeletedNotifications[i].id);
         if (isDeleted >= 0) {
-            newArrForNotifications.push(checkForDeletedNotifications[i]);
+            newNotificationsArr.push(checkForDeletedNotifications[i]);
         }
     }
-    localStorage.setItem('notifications', JSON.stringify(newArrForNotifications));
-    return newArrForNotifications;
+
+    localStorage.setItem(STORAGE_KEYS.localstorage.notifications, JSON.stringify(newNotificationsArr));
+
+    return newNotificationsArr;
 };
 
 
@@ -21,9 +24,10 @@ export const checkForNotificationsDeleted = (apiResponce) => {
 export const checkForNotificationsChanges = (fetchedNotifications, localStorageNotifications, isNewNotification) => {
     let hasChangedGlobal = false;
 
-    let checkedNotifArr = [];
+    const checkedNotificationsArr = [];
     fetchedNotifications.map(fetchedNotif => {
-        let existingNotification = localStorageNotifications.find(localNotif => localNotif.id === fetchedNotif.id);
+        const existingNotification = localStorageNotifications.find(localNotif => localNotif.id === fetchedNotif.id);
+
         if (existingNotification) {
             switch (existingNotification.type) {
                 case 'text':
@@ -33,10 +37,10 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         if (existingNotification.new) {
                             isNewNotification = true;
                         }
-                        checkedNotifArr.push(existingNotification);
+                        checkedNotificationsArr.push(existingNotification);
                     } else {
                         hasChangedGlobal = true;
-                        checkedNotifArr.unshift(fetchedNotif);
+                        checkedNotificationsArr.unshift(fetchedNotif);
                         isNewNotification = true;
                     }
                     break;
@@ -47,10 +51,10 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         if (existingNotification.new) {
                             isNewNotification = true;
                         }
-                        checkedNotifArr.push(existingNotification);
+                        checkedNotificationsArr.push(existingNotification);
                     } else {
                         hasChangedGlobal = true;
-                        checkedNotifArr.unshift(fetchedNotif);
+                        checkedNotificationsArr.unshift(fetchedNotif);
                         isNewNotification = true;
                     }
                     break;
@@ -62,11 +66,11 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                         if (existingNotification.new) {
                             isNewNotification = true;
                         }
-                        checkedNotifArr.push(existingNotification);
+                        checkedNotificationsArr.push(existingNotification);
                     } else {
 
                         hasChangedGlobal = true;
-                        checkedNotifArr.unshift(fetchedNotif);
+                        checkedNotificationsArr.unshift(fetchedNotif);
                         isNewNotification = true;
                     }
                     break;
@@ -74,17 +78,17 @@ export const checkForNotificationsChanges = (fetchedNotifications, localStorageN
                     break;
             }
         } else {
-            checkedNotifArr.unshift(fetchedNotif);
+            checkedNotificationsArr.unshift(fetchedNotif);
             isNewNotification = true;
         }
 
-        //Add new notifications if none is found in localStorage at the begining
-        let addIfNewNotificationComes = localStorageNotifications.findIndex(localNotif => localNotif.id === fetchedNotif.id);
+        //Add new notifications if none is found in localStorage at the beginning
+        const addIfNewNotificationComes = localStorageNotifications.findIndex(localNotif => localNotif.id === fetchedNotif.id);
         if (addIfNewNotificationComes < 0) {
-            checkedNotifArr.unshift(fetchedNotif);
+            checkedNotificationsArr.unshift(fetchedNotif);
             isNewNotification = true;
         }
-        return checkedNotifArr;
+        return checkedNotificationsArr;
     });
-    return { checkedNotifArr, isNewNotification, hasChangedGlobal }
+    return { checkedNotificationsArr, isNewNotification, hasChangedGlobal }
 };
